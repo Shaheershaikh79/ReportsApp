@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { motion, Variants } from "framer-motion";
 
+// Option 2: Import as any (if you're still having type issues)
+const ToasterAny = Toaster as any;
 import { useAuth } from "../AuthContext";
 const MotionForm: any = motion.form as typeof motion.form;
 const MotionSpan: any = motion.span as typeof motion.span;
@@ -73,7 +75,7 @@ export default function Register() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-100 flex items-center justify-center py-12 px-4 relative">
-      <Toaster
+      <ToasterAny
         position="top-right"
         toastOptions={{
           duration: 4000,

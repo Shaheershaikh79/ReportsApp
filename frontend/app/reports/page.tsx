@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useAuth } from "../AuthContext";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
+const ToasterAny = Toaster as any;
 
 interface Report {
   id: string;
@@ -56,9 +57,12 @@ export default function ReportsPage() {
   const fetchReports = async () => {
     if (!token) return;
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/reports`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/reports`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       if (!res.ok) {
         const err = await res.json();
         throw new Error(err.error || "Failed to fetch reports");
@@ -179,7 +183,7 @@ export default function ReportsPage() {
         </button>
       </div>
 
-      <Toaster position="top-right" />
+      <ToasterAny position="top-right" />
 
       <div className="container mx-auto px-4">
         <MotionDiv

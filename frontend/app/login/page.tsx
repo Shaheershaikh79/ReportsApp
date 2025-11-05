@@ -3,8 +3,10 @@ import { useState, FormEvent, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useAuth } from '../AuthContext'
 import { useRouter } from 'next/navigation'
-import toast, { Toaster } from 'react-hot-toast'
+import toast, { Toaster } from "react-hot-toast";
 
+// Option 2: Import as any (if you're still having type issues)
+const ToasterAny = Toaster as any;
 // Define motion components with proper types
 const MotionDiv:any = motion.div
 const MotionForm:any = motion.form
@@ -92,7 +94,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 flex items-center justify-center py-12 px-4">
-      <Toaster
+      <ToasterAny
         position="top-right"
         toastOptions={{
           duration: 4000,
@@ -255,7 +257,7 @@ export default function Login() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              Don't have an account?{' '}
+              Dont have an account?
               <MotionA
                 href="/register"
                 className="font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200"

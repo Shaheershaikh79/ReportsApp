@@ -7,6 +7,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "../../AuthContext";
 const MotionDiv:any = motion.div as typeof motion.div
 
+// Option 2: Import as any (if you're still having type issues)
+const ToasterAny = Toaster as any;
 export default function NewReportPage() {
   const router = useRouter();
   const { user, token, loading } = useAuth();
@@ -81,7 +83,7 @@ export default function NewReportPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <Toaster
+      <ToasterAny
         position="top-right"
         toastOptions={{
           duration: 4000,

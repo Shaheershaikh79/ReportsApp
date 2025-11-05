@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-// Option 2: Import as any (if you're still having type issues)
 const ToasterAny = Toaster as any;
 import { motion } from "framer-motion";
 import { useAuth } from "../AuthContext";
