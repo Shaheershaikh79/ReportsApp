@@ -8,6 +8,6 @@ export default defineConfig({
   engine: "classic",
   datasource: {
     // ✅ Safely use environment variable, with fallback for local testing
-    url: process.env.DATABASE_URL,
+    url: "postgresql://postgres:12345678@db.ldgfbkfzmpvsctexifbs.supabase.co:5432/postgres",
   },
 });
