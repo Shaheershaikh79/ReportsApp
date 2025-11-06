@@ -11,13 +11,13 @@ const auth = async (req, res, next) => {
     const token = authHeader.replace("Bearer ", "").trim();
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // decoded contains { userId, role }
-    const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+    });
     if (!user) {
       return res.status(401).json({ error: "Invalid token" });
     }
 
-    // Attach user info including role to req.user
     req.userId = decoded.userId;
     req.user = {
       id: user.id,
@@ -32,8 +32,6 @@ const auth = async (req, res, next) => {
     res.status(401).json({ error: "Unauthorized" });
   }
 };
-
-
 
 module.exports = { auth };
 

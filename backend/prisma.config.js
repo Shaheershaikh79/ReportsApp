@@ -7,7 +7,7 @@ export default defineConfig({
   },
   engine: "classic",
   datasource: {
-    // Hardcode your Supabase PostgreSQL connection string here
-    url: "postgresql://postgres:12345678@db.ldgfbkfzmpvsctexifbs.supabase.co:5432/postgres",
+    // ✅ Safely use environment variable, with fallback for local testing
+    url: process.env.DATABASE_URL,
   },
 });

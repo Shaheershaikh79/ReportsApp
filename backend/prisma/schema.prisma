@@ -1,13 +1,12 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:12345678@db.ldgfbkfzmpvsctexifbs.supabase.co:5432/postgres"
-}
-
-generator client {
-  provider = "prisma-client-js"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -15,7 +14,7 @@ model User {
   name     String
   email    String @unique
   password String
-  role     String @default("user") // <-- add this line
+  role     String @default("user") 
 
   reports Report[]
 }
