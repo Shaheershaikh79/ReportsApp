@@ -1,0 +1,165 @@
+Create Report
+Method: POST /api/reports
+
+Description: Create a new daily work report
+
+Validation: reportSchema
+
+Access: All authenticated users
+
+Controller: reportController.createReport
+
+Get User Profile
+
+Description: Get current authenticated user profile
+
+
+Update Report
+Method: PUT /api/reports/:id
+
+Description: Update an existing report
+
+Validation: reportSchema
+
+Access: Report owner or Admin
+
+Controller: reportController.updateReport
+
+Get User Reports
+Method: GET /api/reports
+
+Description: Get all reports for the current user
+
+Access: All authenticated users
+
+Controller: reportController.getUserReports
+
+Response:
+
+Regular User: Only their own reports
+
+Admin User: All users' reports
+
+Get Specific Report
+Method: GET /api/reports/:id
+
+Description: Get a specific report by ID
+
+Access: Report owner or Admin
+
+Controller: reportController.getReport
+
+Delete Report
+Method: DELETE /api/reports/:id
+
+Description: Delete a specific report
+
+Access: Report owner or Admin
+
+Controller: reportController.deleteReport
+
+🛡️ Admin Routes (/api/admin)
+All admin routes require admin role authentication.
+
+Dashboard Statistics
+Method: GET /api/admin/dashboard
+
+Description: Get users statistics and analytics
+
+Access: Admin only
+
+Controller: adminController.getUsersStatistics
+
+Delete Report (Admin)
+Method: DELETE /api/admin/reports/:id
+
+Description: Delete any user's report
+
+Access: Admin only
+
+Controller: adminController.deleteReport
+
+Delete User
+Method: DELETE /api/admin/users/:id
+
+Description: Delete a user from the system
+
+Access: Admin only
+
+Controller: adminController.deleteUser
+
+🔐 Authentication Routes (/api/auth)
+User Registration
+Method: POST /api/auth/register
+
+Description: Register a new user account
+
+Validation: registerSchema
+
+Controller: authController.register
+
+User Login
+Method: POST /api/auth/login
+
+Description: Authenticate user and return JWT token
+
+Validation: loginSchema
+
+Controller: authController.login
+
+
+
+Schemas
+
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  role     String @default("user")
+
+  reports Report[]
+}
+
+model Report {
+  id      Int      @id @default(autoincrement())
+  date    DateTime
+  tasks   String
+  timings String
+  notes   String?
+  userId  String
+  user    User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+}
+
+
+Frontend pages
+
+dashboard: only admin can access it and he will see users all all reports and can  delete any report or user.
+reports: Only user will see his reports based on he generate report he can delete update his report as well 
+reports/new: can add new report.
+login for login with token system
+register for sign up.
+system will detect everything by default he is admin or user and provide authorization accordingly.
+
+
+
+frontend end point hosted on vercel https://reports-az4vki946-shaheershaikh79s-projects.vercel.app/dashboard
+
+
+frontend end point hosted on vercel https://reports-az4vki946-shaheershaikh79s-projects.vercel.app/dashboard.
+backend end point https://reportsapp-production.up.railway.app/api. hosted on railway hosting.
+
+We have used prisma and supabase as our database and frontend on next js backend on next js frontend is hosted on vercel backend on railway hosting.
+
+
+
+
+
+
+
+
+
+
